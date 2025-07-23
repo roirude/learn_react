@@ -14,17 +14,14 @@ const root = createRoot(document.getElementById("root"))
 /**
  * Challenge:
  * 
- * Using flexbox, line up the `li`s horizontally and put them inline
- * with the React logo.
- * 
- * NOTE: for practice's sake, don't select any
- * elements, but use classes for all styling.
+ * Move the `width` style off the JSX and into CSS with a dedicated
+ * className on the img element, and change the width to 55px instead
  */
 
 function Header() {
   return (
     <header className="header">
-      <img src="./vite.svg" width="40px" alt="React logo" />
+      <img className="logo" src="./vite.svg" alt="React logo" />
       <nav>
         <ul className="nav-list">
           <li className="nav-list-item">Pricing</li>
