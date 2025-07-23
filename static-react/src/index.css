@@ -67,9 +67,18 @@ button:focus-visible {
   }
 }
 
-
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .nav-list {
   display: flex;
   list-style: none;
   gap: 10px;
+}
+
+.nav-list-item{
+  font-weight: bold;
+  font-size: 1.1rem;
 }

@@ -23,13 +23,13 @@ const root = createRoot(document.getElementById("root"))
 
 function Header() {
   return (
-    <header>
+    <header className="header">
       <img src="./vite.svg" width="40px" alt="React logo" />
       <nav>
         <ul className="nav-list">
-          <li>Pricing</li>
-          <li>About</li>
-          <li>Contact</li>
+          <li className="nav-list-item">Pricing</li>
+          <li className="nav-list-item">About</li>
+          <li className="nav-list-item">Contact</li>
         </ul>
       </nav>
     </header>
