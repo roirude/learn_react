@@ -9,18 +9,24 @@ import App from "./App.jsx";
 //   </StrictMode>
 // );
 
-/** Challenge:
- * Move the `main` element into its own component called "MainContent"
- * and render that component inside the Page component.
- *
- * Do the same with the `footer` element, moving it into a new
- * component called "Footer"
+/**
+ * Challenge:
+ * 
+ * - Add a `nav` > `ul` > `li` (x3). The 3 items should say:
+ *   "Pricing", "About", and "Contact"
  */
 
 function Header() {
   return (
     <header>
       <img src="react-logo.png" width="40px" alt="React logo" />
+      <nav>
+        <ul>
+          <li>Pricing</li>
+          <li>About</li>
+          <li>Contact</li>
+        </ul>
+      </nav>
     </header>
   );
 }
