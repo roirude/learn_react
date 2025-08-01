@@ -4,4 +4,4 @@ export default function Main() {
             Main Goes here
         </h1>
     )
-}
+} 
