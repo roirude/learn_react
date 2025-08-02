@@ -28,8 +28,27 @@ header {
   color: #61DAFB;
 }
 
+/* 
+Challenge: Place the gray react logo in the background
+
+Don't use an `img` element, but rather set it as the
+`background-image` of the `main` element.
+
+Hint: you'll need to use the following properties:
+- background-image: url(...)
+- background-repeat
+- background-position
+
+(Or the shorthand `background` property with values for all
+those other properties)
+*/
+
 main {
   padding: 20px;
+  background-image: url(./assets/react.svg);
+  background-repeat: no-repeat;
+  background-position: right 75%;
+  background-size: 200px;
 }
 
 ul li {
@@ -41,3 +60,4 @@ li::marker {
   color: #61DAFB;
   font-size: 1.4rem;
 }
+
