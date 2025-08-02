@@ -41,5 +41,25 @@ button {
 
 
 .cloud-container {
-    background-color:  rgba(255, 255, 255, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.cloud-filter {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    mask-image: linear-gradient(to top, black 40%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to top, black 40%, transparent 100%);
+    z-index: 0;
+}
+
+.cloud-content {
+    position: relative;
+    z-index: 1;
 }
