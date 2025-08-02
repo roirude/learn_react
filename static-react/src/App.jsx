@@ -1,14 +1,10 @@
-import Main from "./components/Main";
-import Navbar from "./components/Navbar";
+import "./style/app.css";
+import Card from "./components/Card";
 
-
-function App() {
+export default function App() {
     return (
         <>
-            <Navbar />
-            <Main />
+            <Card />
         </>
     )
 }
-
-export default App;

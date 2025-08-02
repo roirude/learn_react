@@ -1,0 +1,41 @@
+.card {
+    width: 300px;
+    height: 500px;
+    background-image: url(../assets/images/card-image.jpg);
+    background-size: cover;
+    background-position: 55% center;
+    border-radius: 25px;
+    color: white;
+    position: relative;
+}
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 20px;
+    background-color:  rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(8px);
+    mask-image: linear-gradient(to top, black 50%, transparent 100%);
+}
+
+.card-rang {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+button {
+    background-color: white;
+    border: none;
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    border-radius: 20px;
+
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
