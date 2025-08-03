@@ -28,7 +28,7 @@ export default function Entry() {
             View on Google Maps
           </a>
         </p>
-        <h2>Mount Fuji</h2>
+        <h2 className="title">Mount Fuji</h2>
         <p className="date">12 Jan, 2021 - 24 Jan, 2021</p>
         <p className="description">
           Mount Fuji is the tallest mountain in Japan, standing at 3,776 meters
