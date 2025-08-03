@@ -17,8 +17,8 @@
 export default function Entry() {
   return (
     <article>
-      <div>
-        <img src="src/assets/japan.png" alt="Mount Fuji" />
+      <div className="main-image-container">
+        <img className="main-image" src="https://scrimba.com/links/travel-journal-japan-image-url" alt="Mount Fuji" />
       </div>
       <div>
         <p className="location">

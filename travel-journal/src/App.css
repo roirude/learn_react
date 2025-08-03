@@ -71,3 +71,17 @@ article .title {
 .description {
   font-size: 0.7rem;
 }
+
+.main-image-container {
+  width: 125px;
+  height: 168px;
+  overflow: hidden; 
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.main-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
