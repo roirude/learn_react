@@ -33,7 +33,7 @@ header h1 {
 }
 
 article {
-  padding: 40px;
+  padding: 40px 40px 0 40px;
   display: flex;
   align-items: center;
   column-gap: 20px;
