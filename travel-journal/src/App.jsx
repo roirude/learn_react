@@ -21,15 +21,16 @@ function App() {
           data.map((entry) => (
             <Entry
               key={entry.id}
-              img={{
-                src: entry.img.src,
-                alt: entry.img.alt
-              }}
-              title={entry.title}
-              country={entry.country}
-              googleMapsLink={entry.googleMapsLink}
-              dates={entry.dates}
-              text={entry.text}
+              entry={entry}
+              // img={{
+              //   src: entry.img.src,
+              //   alt: entry.img.alt
+              // }}
+              // title={entry.title}
+              // country={entry.country}
+              // googleMapsLink={entry.googleMapsLink}
+              // dates={entry.dates}
+              // text={entry.text}
             />
           ))
         }
