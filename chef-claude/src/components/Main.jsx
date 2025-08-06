@@ -7,7 +7,8 @@ export default function Main() {
      * simply console.log("Form submitted!") for now
      */
     
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault();
     console.log("Form submitted!");
   }
 
