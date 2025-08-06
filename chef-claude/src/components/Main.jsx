@@ -2,16 +2,18 @@ export default function Main() {
   const ingredients = ["Chicken", "Oregano", "Tomatoes"];
 
   /**
-   * Review Challenge:
-   * Map over the list of ingredients and render them as list items
-   *
-   * Note: We're doing things a weird way here. Don't worry,
-   * we're building up to learning the right way 🙂
-   */
+     * Challenge:
+     * Add an `onSubmit` event listener on the form. Have the function
+     * simply console.log("Form submitted!") for now
+     */
+    
+  function handleSubmit() {
+    console.log("Form submitted!");
+  }
 
   return (
     <main>
-      <form className="add-ingredient-form">
+      <form className="add-ingredient-form" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="e.g. oregano"
