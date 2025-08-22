@@ -1,21 +1,19 @@
-export default function Main() {
-  const ingredients = ["Chicken", "Oregano", "Tomatoes"];
+import { useState } from "react";
 
-  /**
-   * Challenge:
-   * Add the new ingredient to the array of ingredients. Also, add a
-   * console.log(ingredients) after adding the ingredient, because
-   * **warning**: you aren't going to see the page update!
-   *
-   * Hint: this is a one-liner solution, so don't overthink it 😅
-   */
+export default function Main() {
+  const [ingredients, setIngredients] = useState(["Chicken", "Oregano", "Tomatoes"]);
+
+      /**
+     * Challenge: Update our app so that when the user enters a
+     * new ingredient and submits the form, it adds that new
+     * ingredient to our list!
+     */
 
   function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const newIngredient = formData.get("ingredient");
-    ingredients.push(newIngredient);
-    console.log(ingredients)
+    setIngredients(prevIngredients => [...prevIngredients, newIngredient])
   }
 
   return (
