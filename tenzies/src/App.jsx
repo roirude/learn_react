@@ -14,7 +14,9 @@ function App() {
   const [newDice, setNewDice] = useState(generateAllNewDice());
 
   function hold(id) {
-    console.log(id);
+    setNewDice(prevNewDice => prevNewDice.map((die) =>
+      die.id === id ? { ...die, isHeld: !die.isHeld } : die
+    )) 
   }
 
   const diceElements = newDice.map((dice) => (
