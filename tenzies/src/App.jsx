@@ -38,12 +38,15 @@ function App() {
     );
   }
 
+  let gameWon = false;
+
   if (
-    newDice.every(die => die.isHeld) && 
-    newDice.every(die => die.value === newDice[0].value)
-) {
-    console.log("Game won!")
-}
+    newDice.every((die) => die.isHeld) &&
+    newDice.every((die) => die.value === newDice[0].value)
+  ) {
+    gameWon = true;
+    console.log("Game won!");
+  }
 
   return (
     <main>
@@ -54,7 +57,7 @@ function App() {
       </p>
       <div className="dice-container">{diceElements}</div>
       <button className="roll-dice" onClick={rollDice}>
-        Roll
+        { gameWon ? "New Game" : "Roll" }
       </button>
     </main>
   );
