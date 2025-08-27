@@ -12,7 +12,7 @@ function App() {
       isHeld: false,
     }));
   }
-  const [newDice, setNewDice] = useState(generateAllNewDice());
+  const [newDice, setNewDice] = useState(() => generateAllNewDice());
 
   function hold(id) {
     setNewDice((prevNewDice) =>
