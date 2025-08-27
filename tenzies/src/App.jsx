@@ -14,11 +14,16 @@ function App() {
   const [newDice, setNewDice] = useState(generateAllNewDice());
 
   function hold(id) {
-    console.log(id)
+    console.log(id);
   }
 
   const diceElements = newDice.map((dice) => (
-    <Die key={dice.id} value={dice.value} isHeld={dice.isHeld} hold={() => hold(dice.id)} />
+    <Die
+      key={dice.id}
+      value={dice.value}
+      isHeld={dice.isHeld}
+      hold={() => hold(dice.id)}
+    />
   ));
 
   function rollDice() {
