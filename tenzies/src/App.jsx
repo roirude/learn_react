@@ -39,11 +39,11 @@ function App() {
   }
 
   if (
-    newDice.filter((die) => die.isHeld).length === newDice.length &&
-    newDice.every((die) => die.value === newDice[0].value)
-  ) {
-    console.log("Game won");
-  }
+    newDice.every(die => die.isHeld) && 
+    newDice.every(die => die.value === newDice[0].value)
+) {
+    console.log("Game won!")
+}
 
   return (
     <main>
