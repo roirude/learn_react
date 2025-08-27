@@ -1,7 +1,21 @@
+import { useEffect } from "react";
 import "./App.css";
 import Die from "./components/Die";
 
 function App() {
+  function generateAllNewDice() {
+    const dices = [];
+    
+    for (let i = 0; i < 10; i++) {
+      const random = Math.ceil(Math.random() * 6)
+      dices.push(random)
+    }
+
+    return dices
+  }
+
+  console.log(generateAllNewDice())
+
   return (
     <main>
       <div className="dice-container">
