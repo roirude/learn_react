@@ -29,7 +29,9 @@ function App() {
   ));
 
   function rollDice() {
-    setNewDice(generateAllNewDice());
+    setNewDice(prevNewDice => prevNewDice.map(die => 
+      !die.isHeld ? {...die, value: Math.ceil(Math.random() * 6)} : die
+    ));
   }
 
   return (
