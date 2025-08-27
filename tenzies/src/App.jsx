@@ -32,11 +32,15 @@ function App() {
   ));
 
   function rollDice() {
-    setNewDice((prevNewDice) =>
-      prevNewDice.map((die) =>
-        !die.isHeld ? { ...die, value: Math.ceil(Math.random() * 6) } : die
-      )
-    );
+    if (!gameWon) {
+      setNewDice((prevNewDice) =>
+        prevNewDice.map((die) =>
+          !die.isHeld ? { ...die, value: Math.ceil(Math.random() * 6) } : die
+        )
+      );
+    } else {
+      setNewDice(() => generateAllNewDice())
+    }
   }
 
   const gameWon =
