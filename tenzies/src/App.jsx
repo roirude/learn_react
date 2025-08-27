@@ -4,17 +4,10 @@ import Die from "./components/Die";
 
 function App() {
   function generateAllNewDice() {
-    const dices = [];
-    
-    for (let i = 0; i < 10; i++) {
-      const random = Math.ceil(Math.random() * 6)
-      dices.push(random)
-    }
-
-    return dices
+    return new Array(10).fill(0).map(() => Math.ceil(Math.random() * 6));
   }
 
-  console.log(generateAllNewDice())
+  console.log(generateAllNewDice());
 
   return (
     <main>
