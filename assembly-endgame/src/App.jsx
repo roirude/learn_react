@@ -6,11 +6,19 @@ import { languages } from "./languages";
 
 function App() {
   const [currentWord, SetCurrentWord] = useState("react");
-
-  const letterElements = currentWord.split("").map((letter, index) => <span key={index}>{letter.toUpperCase()}</span>);
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
   const languageElements = languages.map((language) => (
     <Language language={language} key={language.name} />
+  ));
+  const letterElements = currentWord
+    .split("")
+    .map((letter, index) => <span key={index}>{letter.toUpperCase()}</span>);
+
+  const keyboardElements = alphabet.split("").map((letter) => (
+    <button key={letter} className="key">
+      {letter.toUpperCase()}
+    </button>
   ));
 
   return (
@@ -22,6 +30,8 @@ function App() {
       </section>
       <section className="language-chips">{languageElements}</section>
       <section className="word">{letterElements}</section>
+      <section className="keyboard">{keyboardElements}</section>
+      <button className="new-game">New Game</button>
     </main>
   );
 }
