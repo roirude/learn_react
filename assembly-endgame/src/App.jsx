@@ -1,5 +1,12 @@
 import "./App.css";
 import Header from "./components/Header";
+import Language from "./components/Language";
+import { languages } from "./languages";
+
+
+const languageElements = languages.map((language) => (
+    <Language language={language} key={language.name} />
+))
 
 function App() {
   return (
@@ -8,6 +15,9 @@ function App() {
       <section className="game-status">
         <h2>You win!</h2>
         <p>Well done! 🎉</p>
+      </section>
+      <section className="language-chips">
+        {languageElements}
       </section>
     </main>
   );
