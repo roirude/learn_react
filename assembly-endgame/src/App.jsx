@@ -7,8 +7,12 @@ import clsx from "clsx";
 
 function App() {
   const [currentWord, SetCurrentWord] = useState("react");
-  const alphabet = "abcdefghijklmnopqrstuvwxyz";
   const [guessedLetters, setGuessedLetters] = useState([]);
+
+  const wrongGuessCount = guessedLetters.filter(letter => !currentWord.includes(letter)).length
+  console.log(wrongGuessCount)
+
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
   const languageElements = languages.map((language) => (
     <Language language={language} key={language.name} />
