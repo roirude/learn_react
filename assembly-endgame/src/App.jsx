@@ -62,12 +62,31 @@ function App() {
     );
   });
 
+  const statusElement =
+    (isGameWon && (
+      <>
+        <h2>You win!</h2>
+        <p>Well done! 🎉</p>
+      </>
+    )) ||
+    (isGameLost && (
+      <>
+        <h2>Game over!</h2>
+        <p>You lose! Better start learning Assembly 😭</p>
+      </>
+    ));
+
   return (
     <main>
       <Header />
-      <section className="game-status">
-        <h2>You win!</h2>
-        <p>Well done! 🎉</p>
+      <section
+        className={clsx(
+          "game-status",
+          isGameLost && "lost",
+          isGameWon && "won"
+        )}
+      >
+        {statusElement}
       </section>
       <section className="language-chips">{languageElements}</section>
       <section className="word">{letterElements}</section>
