@@ -10,13 +10,18 @@ function App() {
   const [guessedLetters, setGuessedLetters] = useState([]);
 
   const wrongGuessCount = guessedLetters.filter(letter => !currentWord.includes(letter)).length
-  console.log(wrongGuessCount)
 
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
-  const languageElements = languages.map((language) => (
-    <Language language={language} key={language.name} />
-  ));
+  const languageElements = languages.map((language, index) => {
+    const isLanguageLost = index < wrongGuessCount
+    const className = clsx({
+      lost: isLanguageLost
+    })
+    return (
+      <Language language={language} key={language.name} className={className} />
+    )
+  });
 
   const letterElements = currentWord.split("").map((letter, index) => {
     const isGuessed = guessedLetters.includes(letter);
