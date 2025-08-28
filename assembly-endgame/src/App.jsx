@@ -7,16 +7,25 @@ import { languages } from "./languages";
 function App() {
   const [currentWord, SetCurrentWord] = useState("react");
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
+  const [guessedLetters, setGuessedLetters] = useState([]);
+  console.log(guessedLetters);
 
   const languageElements = languages.map((language) => (
     <Language language={language} key={language.name} />
   ));
+
   const letterElements = currentWord
     .split("")
     .map((letter, index) => <span key={index}>{letter.toUpperCase()}</span>);
 
+  function addGuessedLetter(letter) {
+    setGuessedLetters((prevLetters) =>
+      prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter]
+    );
+  }
+
   const keyboardElements = alphabet.split("").map((letter) => (
-    <button key={letter} className="key">
+    <button key={letter} onClick={() => addGuessedLetter(letter)}>
       {letter.toUpperCase()}
     </button>
   ));
