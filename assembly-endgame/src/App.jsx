@@ -9,18 +9,26 @@ function App() {
   const [currentWord, SetCurrentWord] = useState("react");
   const [guessedLetters, setGuessedLetters] = useState([]);
 
-  const wrongGuessCount = guessedLetters.filter(letter => !currentWord.includes(letter)).length
+  const wrongGuessCount = guessedLetters.filter(
+    (letter) => !currentWord.includes(letter)
+  ).length;
+  const isGameLost = wrongGuessCount >= languages.length - 1;
+  const isGameWon = currentWord
+    .split("")
+    .every((letter) => guessedLetters.includes(letter));
+
+  const isGameOver = isGameWon || isGameLost;
 
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
   const languageElements = languages.map((language, index) => {
-    const isLanguageLost = index < wrongGuessCount
+    const isLanguageLost = index < wrongGuessCount;
     const className = clsx({
-      lost: isLanguageLost
-    })
+      lost: isLanguageLost,
+    });
     return (
       <Language language={language} key={language.name} className={className} />
-    )
+    );
   });
 
   const letterElements = currentWord.split("").map((letter, index) => {
@@ -64,7 +72,7 @@ function App() {
       <section className="language-chips">{languageElements}</section>
       <section className="word">{letterElements}</section>
       <section className="keyboard">{keyboardElements}</section>
-      <button className="new-game">New Game</button>
+      {isGameOver ? <button className="new-game">New Game</button> : undefined}
     </main>
   );
 }

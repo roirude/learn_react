@@ -4,7 +4,6 @@ export default function Language({language, className}) {
         backgroundColor: language.backgroundColor,
         color: language.color
     }
-    console.log(className)
 
     return (
         <span style={styles} className={`chip ${className}`}>
