@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Language from "./components/Language";
 import { languages } from "./languages";
 import clsx from "clsx";
+import { getFarewellText } from "./utils";
 
 function App() {
   const [currentWord, SetCurrentWord] = useState("react");
@@ -18,6 +19,8 @@ function App() {
     .every((letter) => guessedLetters.includes(letter));
 
   const isGameOver = isGameWon || isGameLost;
+  const [statusMessage, setStatusMessage] = useState("");
+  const [farewell, setFarewell] = useState(false);
 
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
@@ -41,6 +44,14 @@ function App() {
     setGuessedLetters((prevLetters) =>
       prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter]
     );
+
+    if (currentWord.includes(letter) || guessedLetters.includes(letter)) {
+      setFarewell(false);
+      setStatusMessage("");
+    } else {
+      setFarewell(true);
+      setStatusMessage(getFarewellText(languages[wrongGuessCount].name));
+    }
   }
 
   const keyboardElements = alphabet.split("").map((letter) => {
@@ -64,25 +75,25 @@ function App() {
 
   function renderGameStatus() {
     if (!isGameOver) {
-        return null
+      return <h2>{statusMessage}</h2>;
     }
 
     if (isGameWon) {
-        return (
-            <>
-                <h2>You win!</h2>
-                <p>Well done! 🎉</p>
-            </>
-        )
+      return (
+        <>
+          <h2>You win!</h2>
+          <p>Well done! 🎉</p>
+        </>
+      );
     } else {
-        return (
-            <>
-                <h2>Game over!</h2>
-                <p>You lose! Better start learning Assembly 😭</p>
-            </>
-        )
+      return (
+        <>
+          <h2>Game over!</h2>
+          <p>You lose! Better start learning Assembly 😭</p>
+        </>
+      );
     }
-}
+  }
 
   return (
     <main>
@@ -90,6 +101,7 @@ function App() {
       <section
         className={clsx(
           "game-status",
+          farewell && !isGameOver && "farewell",
           isGameLost && "lost",
           isGameWon && "won"
         )}
