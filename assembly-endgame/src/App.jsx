@@ -14,9 +14,11 @@ function App() {
     <Language language={language} key={language.name} />
   ));
 
-  const letterElements = currentWord
-    .split("")
-    .map((letter, index) => <span key={index}>{letter.toUpperCase()}</span>);
+  const letterElements = currentWord.split("").map((letter, index) => {
+    const isGuessed = guessedLetters.includes(letter);
+    const letterDisplay = isGuessed ? letter : "";
+    return <span key={index}>{letterDisplay.toUpperCase()}</span>;
+  });
 
   function addGuessedLetter(letter) {
     setGuessedLetters((prevLetters) =>
@@ -25,17 +27,17 @@ function App() {
   }
 
   const keyboardElements = alphabet.split("").map((letter) => {
-    const isGuessed = guessedLetters.includes(letter)
-    const isCorrect = isGuessed && currentWord.includes(letter)
-    const isWrong = isGuessed && !currentWord.includes(letter)
+    const isGuessed = guessedLetters.includes(letter);
+    const isCorrect = isGuessed && currentWord.includes(letter);
+    const isWrong = isGuessed && !currentWord.includes(letter);
     const className = clsx({
       correct: isCorrect,
-      wrong: isWrong
-    })
-
-    console.log(className)
+      wrong: isWrong,
+    });
     return (
-      <button key={letter} onClick={() => addGuessedLetter(letter)}
+      <button
+        key={letter}
+        onClick={() => addGuessedLetter(letter)}
         className={className}
       >
         {letter.toUpperCase()}
