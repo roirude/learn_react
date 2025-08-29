@@ -10,10 +10,11 @@ function App() {
   const [currentWord, SetCurrentWord] = useState("react");
   const [guessedLetters, setGuessedLetters] = useState([]);
 
+  const numGuessesLeft = languages.length - 1
   const wrongGuessCount = guessedLetters.filter(
     (letter) => !currentWord.includes(letter)
   ).length;
-  const isGameLost = wrongGuessCount >= languages.length - 1;
+  const isGameLost = wrongGuessCount >= numGuessesLeft;
   const isGameWon = currentWord
     .split("")
     .every((letter) => guessedLetters.includes(letter));
@@ -118,7 +119,17 @@ function App() {
       </section>
       <section className="language-chips">{languageElements}</section>
       <section className="word">{letterElements}</section>
+      
+      {/* Combined visually-hidden aria-live region for status updates */}
       <section className="sr-only" aria-live="polite" role="status">
+        <p>
+          {
+            currentWord.includes(lastGuessedLetter) ?
+            `Correct! The letter ${lastGuessedLetter} is in the word.` :
+            `Sorry, The letter ${lastGuessedLetter} is not in the word.`
+          }
+          You have {numGuessesLeft} attempts left.
+        </p>
         <p>
           Current word:{" "}
           {currentWord
