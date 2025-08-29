@@ -19,8 +19,9 @@ function App() {
     .every((letter) => guessedLetters.includes(letter));
 
   const isGameOver = isGameWon || isGameLost;
-  const lastGuessedLetter = guessedLetters[guessedLetters.length - 1]
-  const isLastGuessIncorrect = lastGuessedLetter && !currentWord.includes(lastGuessedLetter)
+  const lastGuessedLetter = guessedLetters[guessedLetters.length - 1];
+  const isLastGuessIncorrect =
+    lastGuessedLetter && !currentWord.includes(lastGuessedLetter);
 
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
@@ -41,17 +42,12 @@ function App() {
   });
 
   function addGuessedLetter(letter) {
+    if (isGameOver) {
+      return;
+    }
     setGuessedLetters((prevLetters) =>
       prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter]
     );
-
-    if (currentWord.includes(letter) || guessedLetters.includes(letter)) {
-      setFarewell(false);
-      setStatusMessage("");
-    } else {
-      setFarewell(true);
-      setStatusMessage(getFarewellText(languages[wrongGuessCount].name));
-    }
   }
 
   const keyboardElements = alphabet.split("").map((letter) => {
@@ -67,6 +63,7 @@ function App() {
         key={letter}
         onClick={() => addGuessedLetter(letter)}
         className={className}
+        disabled={isGameOver}
       >
         {letter.toUpperCase()}
       </button>
@@ -75,28 +72,32 @@ function App() {
 
   function renderGameStatus() {
     if (!isGameOver && isLastGuessIncorrect) {
-        return <p className="farewell-message">{getFarewellText(languages[wrongGuessCount - 1].name)}</p>
+      return (
+        <p className="farewell-message">
+          {getFarewellText(languages[wrongGuessCount - 1].name)}
+        </p>
+      );
     }
 
     if (isGameWon) {
-        return (
-            <>
-                <h2>You win!</h2>
-                <p>Well done! 🎉</p>
-            </>
-        )
-    } 
-    if (isGameLost) {
-        return (
-            <>
-                <h2>Game over!</h2>
-                <p>You lose! Better start learning Assembly 😭</p>
-            </>
-        )
+      return (
+        <>
+          <h2>You win!</h2>
+          <p>Well done! 🎉</p>
+        </>
+      );
     }
-    
-    return null
-}
+    if (isGameLost) {
+      return (
+        <>
+          <h2>Game over!</h2>
+          <p>You lose! Better start learning Assembly 😭</p>
+        </>
+      );
+    }
+
+    return null;
+  }
 
   return (
     <main>
