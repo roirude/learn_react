@@ -38,11 +38,18 @@ function App() {
 
   const letterElements = currentWord.split("").map((letter, index) => {
     const isGuessed = guessedLetters.includes(letter);
-    const letterDisplay = isGuessed ? letter : "";
-    return <span key={index}>{letterDisplay.toUpperCase()}</span>;
+    let letterDisplay = isGuessed ? letter : "";
+    if (isGameOver && isGameLost) {
+      letterDisplay = letter
+    }
+    const className = clsx({
+      loseLetter : !isGuessed
+    })
+    return <span key={index} className={className}>{letterDisplay.toUpperCase()}</span>;
   });
 
-  function addGuessedLetter(letter) {
+  function addGuessedLetter
+  (letter) {
     if (isGameOver) {
       return;
     }
