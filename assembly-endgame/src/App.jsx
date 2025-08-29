@@ -64,6 +64,8 @@ function App() {
         onClick={() => addGuessedLetter(letter)}
         className={className}
         disabled={isGameOver}
+        aria-disabled={guessedLetters.includes(letter)}
+        aria-label={`Letter ${letter}`}
       >
         {letter.toUpperCase()}
       </button>
@@ -103,6 +105,8 @@ function App() {
     <main>
       <Header />
       <section
+        aria-live="polite"
+        role="status"
         className={clsx(
           "game-status",
           isLastGuessIncorrect && !isGameOver && "farewell",
@@ -114,6 +118,17 @@ function App() {
       </section>
       <section className="language-chips">{languageElements}</section>
       <section className="word">{letterElements}</section>
+      <section className="sr-only" aria-live="polite" role="status">
+        <p>
+          Current word:{" "}
+          {currentWord
+            .split("")
+            .map((letter) =>
+              guessedLetters.includes(letter) ? letter + "." : "blank."
+            )
+            .join(" ")}
+        </p>
+      </section>
       <section className="keyboard">{keyboardElements}</section>
       {isGameOver ? <button className="new-game">New Game</button> : undefined}
     </main>
