@@ -4,10 +4,10 @@ import Header from "./components/Header";
 import Language from "./components/Language";
 import { languages } from "./languages";
 import clsx from "clsx";
-import { getFarewellText } from "./utils";
+import { getFarewellText, getRandomWord } from "./utils";
 
 function App() {
-  const [currentWord, SetCurrentWord] = useState("react");
+  const [currentWord, SetCurrentWord] = useState(() => getRandomWord());
   const [guessedLetters, setGuessedLetters] = useState([]);
 
   const numGuessesLeft = languages.length - 1
@@ -119,7 +119,7 @@ function App() {
       </section>
       <section className="language-chips">{languageElements}</section>
       <section className="word">{letterElements}</section>
-      
+
       {/* Combined visually-hidden aria-live region for status updates */}
       <section className="sr-only" aria-live="polite" role="status">
         <p>
