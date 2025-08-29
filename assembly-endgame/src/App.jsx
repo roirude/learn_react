@@ -5,10 +5,12 @@ import Language from "./components/Language";
 import { languages } from "./languages";
 import clsx from "clsx";
 import { getFarewellText, getRandomWord } from "./utils";
+import Confetti from "react-confetti";
 
 function App() {
   const [currentWord, SetCurrentWord] = useState(() => getRandomWord());
   const [guessedLetters, setGuessedLetters] = useState([]);
+  console.log(currentWord);
 
   const numGuessesLeft = languages.length - 1;
   const wrongGuessCount = guessedLetters.filter(
@@ -40,16 +42,19 @@ function App() {
     const isGuessed = guessedLetters.includes(letter);
     let letterDisplay = isGuessed ? letter : "";
     if (isGameOver && isGameLost) {
-      letterDisplay = letter
+      letterDisplay = letter;
     }
     const className = clsx({
-      loseLetter : !isGuessed
-    })
-    return <span key={index} className={className}>{letterDisplay.toUpperCase()}</span>;
+      loseLetter: !isGuessed,
+    });
+    return (
+      <span key={index} className={className}>
+        {letterDisplay.toUpperCase()}
+      </span>
+    );
   });
 
-  function addGuessedLetter
-  (letter) {
+  function addGuessedLetter(letter) {
     if (isGameOver) {
       return;
     }
@@ -116,6 +121,9 @@ function App() {
 
   return (
     <main>
+      {isGameWon ? (
+        <Confetti recycle={false} numberOfPieces={1000} />
+      ) : undefined}
       <Header />
       <section
         aria-live="polite"
