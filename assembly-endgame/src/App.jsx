@@ -10,7 +10,7 @@ function App() {
   const [currentWord, SetCurrentWord] = useState(() => getRandomWord());
   const [guessedLetters, setGuessedLetters] = useState([]);
 
-  const numGuessesLeft = languages.length - 1
+  const numGuessesLeft = languages.length - 1;
   const wrongGuessCount = guessedLetters.filter(
     (letter) => !currentWord.includes(letter)
   ).length;
@@ -102,6 +102,11 @@ function App() {
     return null;
   }
 
+  function startNewGame() {
+    SetCurrentWord(getRandomWord());
+    setGuessedLetters([]);
+  }
+
   return (
     <main>
       <Header />
@@ -123,11 +128,9 @@ function App() {
       {/* Combined visually-hidden aria-live region for status updates */}
       <section className="sr-only" aria-live="polite" role="status">
         <p>
-          {
-            currentWord.includes(lastGuessedLetter) ?
-            `Correct! The letter ${lastGuessedLetter} is in the word.` :
-            `Sorry, The letter ${lastGuessedLetter} is not in the word.`
-          }
+          {currentWord.includes(lastGuessedLetter)
+            ? `Correct! The letter ${lastGuessedLetter} is in the word.`
+            : `Sorry, The letter ${lastGuessedLetter} is not in the word.`}
           You have {numGuessesLeft} attempts left.
         </p>
         <p>
@@ -141,7 +144,11 @@ function App() {
         </p>
       </section>
       <section className="keyboard">{keyboardElements}</section>
-      {isGameOver ? <button className="new-game">New Game</button> : undefined}
+      {isGameOver ? (
+        <button className="new-game" onClick={startNewGame}>
+          New Game
+        </button>
+      ) : undefined}
     </main>
   );
 }
