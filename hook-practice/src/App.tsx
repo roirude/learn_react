@@ -1,17 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 
 function App() {
-  const [counter, setCounter] = useState(0)
+  const [value, setValue] = useState(0)
+  const count = useRef(0)
 
   useEffect(() => {
-    setTimeout(() => {
-      setCounter(prev => prev + 1)
-    }, 1000)
-  }, [counter])
+    count.current += 1
+  })
+
   return (
     <>
-      <h1>I've rendered {counter} times.</h1>
+      <button onClick={() => setValue(prev => prev - 1)}>-1</button>
+      <h1>{value}</h1>
+      <button onClick={() => setValue(prev => prev + 1)}>+1</button>
+      <h2>Rendered Count: {count.current}</h2>
     </>
   )
 }
