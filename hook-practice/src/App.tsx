@@ -17,7 +17,12 @@ function App() {
     type: "decrease";
   }
 
-  type Action = IncreaseAction | DecreaseAction;
+  interface InputAction {
+    type: "input";
+    payload: number
+  }
+
+  type Action = IncreaseAction | DecreaseAction | InputAction;
 
   const reducer = (state: State, action: Action): State => {
     switch (action.type) {
@@ -26,6 +31,9 @@ function App() {
       }
       case "decrease": {
         return { counter: state.counter - 1 }
+      }
+      case "input": {
+        return { counter: action.payload }
       }
       default: {
         return state
@@ -40,6 +48,13 @@ function App() {
       <h1>Counter: {state.counter}</h1>
       <button onClick={() => dispatch({ type: "increase" })}>Increase</button>
       <button onClick={() => dispatch({ type: "decrease" })}>Decrease</button>
+      <br />
+      <input
+        type="number"
+        placeholder='enter number'
+        value={state.counter}
+        onChange={(e) => dispatch({ type: "input", payload: Number(e.target.value) })}
+      />
     </>
   )
 }
