@@ -2,21 +2,18 @@ import { useState } from 'react'
 import './App.css'
 
 function App() {
-  const [car, setCar] = useState({
-    brand: "ferrari",
-    model: "roma",
-    color: "red",
-    year: "2023"
-  })
+  const [counter, setCounter] = useState(0)
 
-  const changeColor = () => {
-    setCar(prev => ({ ...prev, color: "blue" }))
+  const increaseCounter = () => {
+    setCounter(prev => prev + 1)
+    setCounter(prev => prev + 1)
+    setCounter(prev => prev + 1)
+    setCounter(prev => prev + 1)
   }
   return (
     <>
-      <h1>My {car.brand}</h1>
-      <h2>It is a {car.color} {car.model} from {car.year}</h2>
-      <button onClick={changeColor}>Blue</button>
+      <h1>Count: {counter}</h1>
+      <button onClick={increaseCounter}>Increase by 4</button>
     </>
   )
 }
