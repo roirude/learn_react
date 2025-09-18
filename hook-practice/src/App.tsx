@@ -1,20 +1,20 @@
-import { useEffect, useRef, useState } from 'react'
+import {  useRef } from 'react'
 import './App.css'
 
 function App() {
-  const [value, setValue] = useState(0)
-  const count = useRef(0)
+  const inputElement = useRef<HTMLInputElement>(null)
 
-  useEffect(() => {
-    count.current += 1
-  })
+  const handleClick = () => {
+    const current = inputElement.current
+    if (current) {
+      current.style.background = "red"
+    }
+  }
 
   return (
     <>
-      <button onClick={() => setValue(prev => prev - 1)}>-1</button>
-      <h1>{value}</h1>
-      <button onClick={() => setValue(prev => prev + 1)}>+1</button>
-      <h2>Rendered Count: {count.current}</h2>
+      <input type="text" placeholder='text' ref={inputElement} />
+      <button onClick={handleClick}>Click here</button>
     </>
   )
 }
