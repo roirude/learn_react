@@ -1,56 +1,35 @@
-import { createContext, useEffect, useReducer } from 'react'
+import { useReducer } from 'react'
 import './App.css'
-import AddToDo from './components/AddToDo'
-import ToDoList from './components/ToDoList'
+import AddTodo from './components/AddTodo'
+import ToDoList from './components/TodoList'
+import type { ActionReducer, Todo } from './type'
+import { TodoContext } from './context/todoContext'
 
-export type Task = {
-  id: number,
-  text: string,
-  completed: boolean
-}
-
-type ActionReducer = {
-  type: string,
-  payload: Task
-}
-
-const todoReducer = (state: Task[], action: ActionReducer) => {
+const todoReducer = (state: Todo[], action: ActionReducer) => {
   switch (action.type) {
     case "ADD_TODO":
       return [
         ...state,
-        { id: Date.now(), text: action.payload.text, completed: false }
+        { id: Date.now(), value: action.payload.value, completed: false }
       ]
-    case "TOGGLE_TODO":
-      return state.map((task: Task) => task.id === action.payload.id
-        ? { ...task, completed: !task.completed }
-        : task
-      )
+    case "TODO_TOOGLE":
+      return state.map((todo) => (
+        todo.id === action.payload.id ? { ...todo, completed: !todo.completed } : todo
+      ))
     case "DELETE_TODO":
-      return state.filter((task) => task.id !== action.payload.id)
+      return state.filter(todo => todo.id !== action.payload.id)
     default:
-      throw new Error()
-
+      throw Error()
   }
 }
 
-type TodoContextType = {
-  tasks: Task[];
-  dispatch: React.Dispatch<ActionReducer>;
-};
-
-export const TodoContext = createContext<TodoContextType | undefined>(undefined)
 
 function App() {
-  useEffect(() => {
-    console.log(tasks)
-  })
-
-  const [tasks, dispatch] = useReducer(todoReducer, [])
-
+  const [todos, dispatch] = useReducer(todoReducer, [])
   return (
-    <TodoContext.Provider value={{ tasks, dispatch }}>
-      <AddToDo />
+    <TodoContext.Provider value={{ todos, dispatch }}>
+      <h1>Todo</h1>
+      <AddTodo />
       <ToDoList />
     </TodoContext.Provider>
   )
