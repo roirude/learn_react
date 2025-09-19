@@ -1,34 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { createContext, useEffect, useReducer } from 'react'
 import './App.css'
+import AddToDo from './components/AddToDo'
+import ToDoList from './components/ToDoList'
+
+export type Task = {
+  id: number,
+  text: string,
+  completed: boolean
+}
+
+type ActionReducer = {
+  type: string,
+  payload: Task
+}
+
+const todoReducer = (state: Task[], action: ActionReducer) => {
+  switch (action.type) {
+    case "ADD_TODO":
+      return [
+        ...state,
+        { id: Date.now(), text: action.payload.text, completed: false }
+      ]
+    case "TOGGLE_TODO":
+      return state.map((task: Task) => task.id === action.payload.id
+        ? { ...task, completed: !task.completed }
+        : task
+      )
+    case "DELETE_TODO":
+      return state.filter((task) => task.id !== action.payload.id)
+    default:
+      throw new Error()
+
+  }
+}
+
+type TodoContextType = {
+  tasks: Task[];
+  dispatch: React.Dispatch<ActionReducer>;
+};
+
+export const TodoContext = createContext<TodoContextType | undefined>(undefined)
 
 function App() {
-  const [count, setCount] = useState(0)
+  useEffect(() => {
+    console.log(tasks)
+  })
+
+  const [tasks, dispatch] = useReducer(todoReducer, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <TodoContext.Provider value={{ tasks, dispatch }}>
+      <AddToDo />
+      <ToDoList />
+    </TodoContext.Provider>
   )
 }
 
